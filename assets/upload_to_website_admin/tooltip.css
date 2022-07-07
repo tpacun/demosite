@@ -1,0 +1,21 @@
+/* For adding tooltips - upload via Website Admin */
+*[data-tooltip] {
+  border: 2px solid orange;
+}
+
+*[data-tooltip]:hover:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    padding: 5px 10px;
+    margin: 0 0 0 350px;
+    background: orange;
+    color: white;
+    border-radius: 3px;
+  }
+
+/* Other Formatting */
+
+.Event_Text {
+  display:flex;
+  flex-direction: column;
+}
