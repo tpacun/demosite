@@ -1,0 +1,158 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%
+}
+
+body {
+    margin: 0;
+    --header-height: 50px; /* Change this in nav rule too (sorry!) */
+    font-size: 1.6rem;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    color: #24292e;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color:inherit;
+    font-weight:600;
+    line-height:1.25;
+    margin-bottom:16px;
+}
+
+h1 {
+    font-size:3.2rem
+}
+h2 {
+    font-size:2.4rem
+}
+h3 {
+    font-size:2.0rem
+}
+h4 {
+    font-size:1.6rem
+}
+h5 {
+    font-size:1.4rem
+}
+h6 {
+    font-size:1.36rem
+}
+
+a, a:hover {
+    color: #75a640;
+    text-decoration: none;
+    font-size: 1.05.rem;
+    font-weight: 600;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #75a640;
+    position: fixed;
+    height: var(--header-height);
+    width: 100%;
+    padding: 0 20px 0 20px;
+}
+
+header a {
+    color: hsla(0,0%,100%,.8);
+    padding-right: 1%;
+    font-size: 2.0rem;
+}
+
+header a:hover {
+    color: #fff
+}
+
+.spektrix-logo {
+    max-height: 70%;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+div.page-container {
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    --sidebar-width: 310px;
+    padding-top: var(--header-height);
+}
+
+.top-title {
+    margin-block-start: .33em;
+}
+
+nav {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: calc(100% - 50px);
+    position: fixed;
+    width: var(--sidebar-width);
+    padding: 20px;
+    background-color: #F0F7E6
+}
+
+main {
+    flex-grow: 4;
+    overflow-y: visible;
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    padding: 5px;
+}
+
+#color-uneditable {
+    background-color: #444B55;
+}
+
+#color-argument {
+    background-color: #F18F01;
+}
+
+#color-admin {
+    background-color:#409BD6;
+}
+
+#color-editable {
+    background-color:#72A23F;
+}
+
+#color-conditional {
+    background-color:#208844;
+}
+
+/* .table-col1 {
+
+} */
+
+.table-col2 {
+    width:33%;
+}
+
+iframe {
+    height: 550px;
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    div.page-container {
+        flex-direction: column;
+    }
+    nav {
+        width: 100%;
+        height:auto;
+        position:relative
+    }
+    main {
+        margin-left: 0;
+    }
+}
