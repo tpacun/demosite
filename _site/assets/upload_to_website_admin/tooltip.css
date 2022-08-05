@@ -98,3 +98,9 @@
   margin-bottom: 50px;
   position: static;
 }
+
+.urlTitle {
+  color: white;
+  background-color: var(--tooltip-color-uneditable);
+  border: 1px solid black;
+}

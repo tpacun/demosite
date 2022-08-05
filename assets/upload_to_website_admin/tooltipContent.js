@@ -6,9 +6,14 @@ function addContent(query, content, textType) {
 
     window.onload = () => {
 
+    // Url string manipulation
     const parentUrl =  window.document.URL
     const parentQuery = parentUrl.toLowerCase().split('/')
     const iframeString = parentQuery[parentQuery.length - 1].split('.')[0]
+    
+    // Add url title at top
+    const body = document.querySelector('body')
+    body.insertAdjacentHTML('afterbegin', `<h1 class="urlTitle">You are are the iframe ${iframeString}</h1>`)
 
     if (iframeString === 'eventlist'){
         // EventList.aspx
@@ -73,6 +78,15 @@ function addContent(query, content, textType) {
         addContent('#ctl00_ContentPlaceHolder_ItemsPanel', 'Default messaging', 'uneditable')
         addContent('#ctl00_ContentPlaceHolder_OptionalMessagePanel', 'Optional message, edited in Settings > Configuration > System Setup > Custom Website Messages > Custom message for basket.aspx', 'editable')
         addContent('#ctl00_ContentPlaceHolder_WhatsOnLink', 'Only appears if a link has be setup in Web Admin > Domain Specific Config > [select domain] > Basket "Book more tickets" Link', 'conditional')
+    } else if (iframeString === 'memberships') {
+        addContent('#ctl00_ContentPlaceHolder_HeaderWikiText', 'Optional message, edited in Settings > Configuration > System Setup > Memberships on Web > Custom message for memberships.aspx', 'editable')
+        addContent('.LoginForRenewalMessage', 'Default messaging', 'uneditable')
+        addContent('.Membership > .WikiText > div', 'Pulls from Website Content for specific membership', 'admin')
+        addContent('input[type="submit"]', 'Default buttons', 'uneditable')
+    } else if (iframeString === 'merchandise') {
+        addContent('#ctl00_ContentPlaceHolder_HeaderWikiTextViewer', 'Optional message, edited in Settings > Configuration > System Setup > Custom message about merchandise', 'editable')
+        addContent('.WikiText', 'Pulls from Website Content for specific merchandise item', 'admin')
+
     }
 
 }
