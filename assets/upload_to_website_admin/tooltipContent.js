@@ -10,7 +10,10 @@ function addContent(query, content, textType) {
     const parentUrl =  window.document.URL
     const parentQuery = parentUrl.toLowerCase().split('/')
     let expressCheckoutString;
+    let iframeArgs;
     let iframeString;
+    let fixedSeriesString;
+    
     // Check for secure
 
     if (parentQuery[5] === 'secure') {
@@ -28,7 +31,15 @@ function addContent(query, content, textType) {
     } else {
 
         // All other iframe strings
-        iframeString = parentQuery[parentQuery.length - 1].split('.')[0]
+        const iframeStringFull = parentQuery[parentQuery.length - 1]
+        iframeString = iframeStringFull.split('.')[0]
+        iframeArgs = iframeStringFull.split('?')[1]
+    }
+
+    // Check fixed series url arguments
+
+    if (iframeString === 'fixedseries') {
+        fixedSeriesString = iframeArgs.split('=')[1]
     }
     
     // Add url title at top
@@ -197,6 +208,39 @@ function addContent(query, content, textType) {
         addContent('.WikiText', 'Pulls from Website Content for specific merchandise item', 'admin')
 
     } else if (iframeString === 'fixedseries'){
+        if (fixedSeriesString === 'ChooseSeries') {
+
+            // Choose FS
+
+            addContent('.IconContainer', 'Pulls from Image for specific Fixed Series', 'admin')
+            addContent('.SeriesName', 'Pull from Name of specific Fixed Series', 'admin')
+            addContent('.SeriesTime', 'Pulls from range of dates for Insances of specific Fixed Series', 'admin')
+            addContent('.BookSeriesLink', 'Default messaging', 'uneditable')
+
+        } else if  (fixedSeriesString === 'EventsAndPricing') {
+
+            // Page 1:  Choose Events, Pricing, Number of Packages
+            addContent('.ChooseEvents', 'Default messaging', 'uneditable')
+            addContent('.FixedSeriesEventsList', 'Pulls  from selected Events for specific Fixed Series', 'admin')
+            addContent('.Button', 'Default messaging', 'uneditable')
+            addContent('.ChoosePricing', 'Default messaging', 'uneditable')
+            addContent('.ChoosePricingButtons', 'Pulls from names of Subscription Pricing Sets for specific Fixed Series', 'admin')
+            addContent('.ChooseNumberOfTickets + h2', 'Default messaging', 'uneditable')
+            addContent('label[for="ctl00_ContentPlaceHolder_EventsAndPricingControl_PackageCountBox"]', 'Default messaging', 'uneditable')
+
+            // Page 2: Choose Sub Group
+
+            addContent('.SubscriptionGroupName', 'Pulls from names of Subscription Groups for specific Fixed Series', 'admin')
+            addContent('.EventInstanceDates', 'Pulls from name and time of Event Instances for specific Fixed Series Subscription Group', 'admin')
+
+            // Page 3: Choose Seat
+
+            // Page 4: Choose Ticket Type
+
+            addContent('.AssignSeatsDescription', 'Default messaging', 'uneditable')
+            addContent('.SeatTicketTypeDropDown', 'Pulls from chosen seat and Ticket Types available for specific Fixed Series', 'admin')
+
+        }
 
     } else if (iframeString === 'donations') {
 
