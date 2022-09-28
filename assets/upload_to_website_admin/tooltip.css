@@ -13,6 +13,14 @@
 
 /* Tooltip styling */
 
+*[data-tooltip-uneditable]:hover,
+*[data-tooltip-argument]:hover,
+*[data-tooltip-admin]:hover,
+*[data-tooltip-editable]:hover,
+*[data-tooltip-conditional]:hover {
+  border-width: 5px;
+}
+
 *[data-tooltip-uneditable] {
   border: 2px solid var(--tooltip-color-uneditable);
 }
@@ -103,4 +111,8 @@
   color: white;
   background-color: var(--tooltip-color-uneditable);
   border: 1px solid black;
+}
+
+ul.MonthList.Options > li {
+  display: inline;
 }

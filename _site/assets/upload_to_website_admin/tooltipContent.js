@@ -10,8 +10,10 @@ function addContent(query, content, textType) {
     const parentUrl =  window.document.URL
     const parentQuery = parentUrl.toLowerCase().split('/')
     let expressCheckoutString;
+    let iframeArgs;
     let iframeString;
-
+    let fixedSeriesString;
+    
     // Check for secure
 
     if (parentQuery[5] === 'secure') {
@@ -29,12 +31,35 @@ function addContent(query, content, textType) {
     } else {
 
         // All other iframe strings
-        iframeString = parentQuery[parentQuery.length - 1].split('.')[0]
+        const iframeStringFull = parentQuery[parentQuery.length - 1]
+        iframeString = iframeStringFull.split('.')[0]
+        iframeArgs = iframeStringFull.split('?')[1]
+    }
+
+    // Check fixed series url arguments
+
+    if (iframeString === 'fixedseries') {
+        fixedSeriesString = iframeArgs.split('=')[1]
     }
     
     // Add url title at top
     const body = document.querySelector('body')
     body.insertAdjacentHTML('afterbegin', `<h1 class="urlTitle">You are are on the iframe ${expressCheckoutString ? expressCheckoutString:iframeString}</h1>`)
+
+    // Classic Checkout
+    // secure/checkout/v2
+    // secure/checkout/v2/startcheckoutlogin
+    // secure/checkout/v2/personaldetails
+    // secure/checkout/v2/ticketdelivery
+    // secure/checkout/v2/merchandisedelivery
+    // secure/checkout/v2/additionaldetails
+    // secure/checkout/v2/donations
+    // secure/checkout/v2/giftaid
+    // secure/checkout/v2/contactpreferences
+    // secure/checkout/v2/ordersummary
+    // secure/checkout/v2/billingdetails
+    // secure/checkout/v2/payment
+    // secure/checkout/v2/orderconfirmation
 
     if(expressCheckoutString) {
         addContent('.spx-header-container', 'Default messaging', 'uneditable')
@@ -81,7 +106,6 @@ function addContent(query, content, textType) {
             addContent('.spx-text-copy__checkout--donation', 'Pulls from Description of specific Fund', 'editable')
             addContent('.spx-label-field__checkout--donation', 'Default messaging', 'uneditable')
             addContent('.spx-field-container__checkout--donation', 'Pulls from Settings > System Setup > Donations', 'editable')
-            addContent()
 
         } else if (expressCheckoutString === 'checkout/v2/giftaid') {
             
@@ -183,26 +207,60 @@ function addContent(query, content, textType) {
         addContent('#ctl00_ContentPlaceHolder_HeaderWikiTextViewer', 'Optional message, edited in Settings > Configuration > System Setup > Custom message about merchandise', 'editable')
         addContent('.WikiText', 'Pulls from Website Content for specific merchandise item', 'admin')
 
+    } else if (iframeString === 'fixedseries'){
+        if (fixedSeriesString === 'ChooseSeries') {
+
+            // Choose FS
+
+            addContent('.IconContainer', 'Pulls from Image for specific Fixed Series', 'admin')
+            addContent('.SeriesName', 'Pull from Name of specific Fixed Series', 'admin')
+            addContent('.SeriesTime', 'Pulls from range of dates for Insances of specific Fixed Series', 'admin')
+            addContent('.BookSeriesLink', 'Default messaging', 'uneditable')
+
+        } else if  (fixedSeriesString === 'EventsAndPricing') {
+
+            // Page 1:  Choose Events, Pricing, Number of Packages
+            addContent('.ChooseEvents', 'Default messaging', 'uneditable')
+            addContent('.FixedSeriesEventsList', 'Pulls  from selected Events for specific Fixed Series', 'admin')
+            addContent('.Button', 'Default messaging', 'uneditable')
+            addContent('.ChoosePricing', 'Default messaging', 'uneditable')
+            addContent('.ChoosePricingButtons', 'Pulls from names of Subscription Pricing Sets for specific Fixed Series', 'admin')
+            addContent('.ChooseNumberOfTickets + h2', 'Default messaging', 'uneditable')
+            addContent('label[for="ctl00_ContentPlaceHolder_EventsAndPricingControl_PackageCountBox"]', 'Default messaging', 'uneditable')
+
+            // Page 2: Choose Sub Group
+
+            addContent('.SubscriptionGroupName', 'Pulls from names of Subscription Groups for specific Fixed Series', 'admin')
+            addContent('.EventInstanceDates', 'Pulls from name and time of Event Instances for specific Fixed Series Subscription Group', 'admin')
+
+            // Page 3: Choose Seat
+
+            // Page 4: Choose Ticket Type
+
+            addContent('.AssignSeatsDescription', 'Default messaging', 'uneditable')
+            addContent('.SeatTicketTypeDropDown', 'Pulls from chosen seat and Ticket Types available for specific Fixed Series', 'admin')
+
+        }
+
+    } else if (iframeString === 'donations') {
+
+        addContent('#ctl00_ContentPlaceHolder_DonationsBlurb', 'Optional message, edited in Settings > Configuration > System Setup > Donations on Web > Custom message for donations.aspx. This appears for checkout donations too.', 'editable')
+        addContent('.FundHeading', 'Pulls from Name of specific Fund', 'admin')
+        addContent('.FundDescription', 'Pulls from Description of specific Fund', 'admin')
+        addContent('.DonationAmount', 'Pulls from Default Amount of specific Fund', 'admin')
+        addContent('[cssclass="RecognitionNameContainer"]', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation recognition on the website', 'conditional')
+        addContent('.RecognitionNameWikiText', 'Edited in Settings > Configuration > System Setup > Custom Website Messages > Custom heading for Donation Recognition Name box. This will appear on donations.aspx if Capture Donation Recognition setting is enabled.', 'editable')
+        addContent('.DonationAnonymityWikiText', 'Edited in Settings > Configuration > System Setup > Custom Website Messages > Custom message for donation anonymity checkbox. This will appear on donations.aspx if Capture Donation Recognition setting is enabled.', 'editable')
+        addContent('[cssclass="AddTributeContainer"]', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation tribute on the website', 'conditional')
+        addContent('.CaptureTributeWikiText', 'Edited in Settings > Configuration > System Setup > Custom Website Messages > Custom message for tribute capture checkbox. This will appear on donations.aspx if Capture Donation Tribute setting is enabled.', 'editable')
+        addContent('[cssclass="TributeTypeAndNameContainer"]', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation tribute on the website', 'conditional')
+        addContent('#ctl00_ContentPlaceHolder_Funds_ctl00_TributeTypeDropDownList', 'Editable in Settings > Configuration > System Setup > Donations > Tribute Type', 'editable')
+
+    } else if (iframeString === 'giftvouchers') {
+        addContent('.AddGiftVoucherBlurb', 'Optional message, editable in Settings > Configuration > System Setup > Custom Website Messages > Custom message to display when a Gift Voucher is added to the basket', 'editable')
+        addContent('.VoucherExpiryText', 'Displays according to Settings > Configuration > System Setup > Credits & Commissions > Default Gift Voucher Expiration', 'conditional')
+
+
+
     }
-
-    //Fixed Series
-
-    //Donations
-
-    // Gift Vouchers
-
-    // Classic Checkout
-    // secure/checkout/v2
-    // secure/checkout/v2/startcheckoutlogin
-    // secure/checkout/v2/personaldetails
-    // secure/checkout/v2/ticketdelivery
-    // secure/checkout/v2/merchandisedelivery
-    // secure/checkout/v2/additionaldetails
-    // secure/checkout/v2/donations
-    // secure/checkout/v2/giftaid
-    // secure/checkout/v2/contactpreferences
-    // secure/checkout/v2/ordersummary
-    // secure/checkout/v2/billingdetails
-    // secure/checkout/v2/payment
-    // secure/checkout/v2/orderconfirmation
     }
