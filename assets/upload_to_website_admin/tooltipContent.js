@@ -277,7 +277,9 @@ function addContent(query, content, textType) {
     } else if (iframeString === 'giftvouchers') {
         addContent('.AddGiftVoucherBlurb', 'Optional message, editable in Settings > Configuration > System Setup > Custom Website Messages > Custom message to display when a Gift Voucher is added to the basket', 'editable')
         addContent('.VoucherExpiryText', 'Displays according to Settings > Configuration > System Setup > Credits & Commissions > Default Gift Voucher Expiration', 'conditional')
-
+        addContent('#ctl00_ContentPlaceHolder_RedeemGiftLink', 'Default messaging', 'uneditable')
+        addContent('.Container', 'Default messaging', 'uneditable')
+        addContent('.Comment.AddAnotherVoucherText', 'Default messaging', 'uneditable')
 
 
     }
