@@ -222,7 +222,8 @@ function addContent(query, content, textType) {
         // Merchandise
 
         addContent('#ctl00_ContentPlaceHolder_HeaderWikiTextViewer', 'Optional message, edited in Settings > Configuration > System Setup > Custom message about merchandise', 'editable')
-        addContent('.WikiText', 'Pulls from Website Content for specific merchandise item', 'admin')
+        addContent('.WikiText', 'Pulls from Website Content for specific Merchandise item', 'admin')
+        addContent('p.Footer', 'Pulls from Price of specific Merchandise item', 'admin')
 
     } else if (iframeString === 'fixedseries'){
         if (fixedSeriesString === 'chooseseries') {
