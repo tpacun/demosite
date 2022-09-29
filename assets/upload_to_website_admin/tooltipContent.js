@@ -39,7 +39,7 @@ function addContent(query, content, textType) {
     // Check fixed series url arguments
 
     if (iframeString === 'fixedseries') {
-        fixedSeriesString = iframeArgs.split('=')[1]
+        fixedSeriesString = iframeArgs.split('=')[1].split('&')[0]
     }
     
     // Add url title at top
