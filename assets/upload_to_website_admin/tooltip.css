@@ -116,3 +116,15 @@
 ul.MonthList.Options > li {
   display: inline;
 }
+
+/* EventCalendar */
+
+div.EventsCalendar.SpektrixPage > table td {
+  border: 1px solid black;
+  width: 14%;
+  vertical-align: top;
+}
+
+td.Date.Inactive {
+  background: lightgray;
+}
