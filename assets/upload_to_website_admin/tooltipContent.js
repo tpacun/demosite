@@ -174,7 +174,7 @@ function addContent(query, content, textType) {
         addContent('table.PriceListTable', 'Pulls from Price List for specific Instance', 'admin')
         addContent('td.PriceBand.Info', 'Price Band', 'admin')
         addContent('th.TicketType', 'Ticket Type', 'admin')
-        addContent('td.TicketType', 'Price, service charge language hidable in Settings > System Setup > Price Lists > Do not itemize commission', 'conditional')
+        addContent('td.TicketType', 'Ticket Price; service charge language hidable in Settings > System Setup > Price Lists > Do not itemize commission', 'conditional')
     } else if (iframeString === 'edittickets') {
             
         // EditTickets.aspx
@@ -189,15 +189,15 @@ function addContent(query, content, textType) {
     } else if (iframeString === 'basket2') {
             
         // Basket2.aspx
-        addContent('h1.BaketHeading', 'Default messaging, will change according to culture segment', 'argument')
-        addContent('#ctl00_ContentPlaceHolder_BasketOwnerWikiText', 'Optional message edited in Settings > System Config > Custom Website Messages > This will appear on Basket2.aspx to indicate who the order is for. Use {0} to indicate the order owner\'s name.', 'editable')
+        addContent('h1.BasketHeading', 'Default messaging, will change according to culture segment', 'argument')
+        addContent('#ctl00_ContentPlaceHolder_BasketOwnerWikiText', 'Optional messaging that will appear if user is logged in; edited in Settings > System Config > Custom Website Messages > This will appear on Basket2.aspx to indicate who the order is for. Use {0} to indicate the order owner\'s name.', 'editable')
         addContent('div#ctl00_ContentPlaceHolder_DiscountsPanel', 'Savings panel, entire panel will appear only if there is at least one offer set up on the system', 'conditional')
         addContent('#ctl00_ContentPlaceHolder_RelatedOffersControl_LoginForDiscounts', 'Default messaging', 'uneditable')
         addContent('.Container.PromoCode', 'Default messaging, will appear only if at least one promo code is set up on the system', 'conditional')
-        addContent('#ctl00_ContentPlaceHolder_PromoCodeBox_PromoCodeTextBox', 'Default messaging', 'uneditable')
         addContent('#ctl00_ContentPlaceHolder_ItemsPanel', 'Default messaging', 'uneditable')
+        addContent('.Promo', 'Default messaging; appears only if Events or Merchandise have been selected as Recommended or Related', 'conditional')
         addContent('#ctl00_ContentPlaceHolder_OptionalMessagePanel', 'Optional message, edited in Settings > Configuration > System Setup > Custom Website Messages > Custom message for basket.aspx', 'editable')
-        addContent('#ctl00_ContentPlaceHolder_WhatsOnLink', 'Only appears if a link has be setup in Web Admin > Domain Specific Config > [select domain] > Basket "Book more tickets" Link', 'conditional')
+        addContent('#ctl00_ContentPlaceHolder_WhatsOnLink', 'Only appears if a link has been added in Web Admin > Domain Specific Config > [select domain] > Basket "Book more tickets" Link', 'conditional')
     } else if (iframeString === 'memberships') {
         //Memberships
 
