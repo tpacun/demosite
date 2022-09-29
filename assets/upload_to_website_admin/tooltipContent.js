@@ -62,7 +62,7 @@ function addContent(query, content, textType) {
     // secure/checkout/v2/orderconfirmation
 
     if(expressCheckoutString) {
-        addContent('.spx-header-container', 'Default messaging', 'uneditable')
+        addContent('.spx-heading-title__checkout spx-heading-title__checkout--personal-details', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--personal-details', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--ticket-delivery', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--additional-details', 'Default messaging', 'uneditable')
@@ -71,14 +71,18 @@ function addContent(query, content, textType) {
         addContent('.spx-heading-headline__checkout--order-summary', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--billing-details', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--payment', 'Default messaging', 'uneditable')
+        addContent('p > span.spx-validation-field-error', 'Appears if Express Checkout has not been turned on in Website Admin > Domain Specific Config > Enable Express Checkout', 'conditional')
+        addContent('#privacy-policy-header, .spx-wikitext-container__checkout--contact-preferences', 'Optional messaging; editable under Settings > Customers > Privacy Policy', 'editable')
 
         if (expressCheckoutString === 'checkout/v2') {
             addContent('.spx-text-copy', 'Default messaging', 'uneditable')
             addContent('.spx-field-container', 'Default messaging', 'uneditable')
+            addContent('.spx-wikitext-container__checkout--start-checkout', 'Optional messaging; editable under Settings > Customers > Privacy Policy', 'editable')
             addContent('button', 'Default messaging', 'uneditable')
 
         } else if (expressCheckoutString === 'checkout/v2/personaldetails') {
-            // New account
+            
+            addContent('.spx-field-container__checkout--personal-details', 'Default messaging [[based upon what things are collected editable AT LOCATION]]', 'conditional')
             
         } else if (expressCheckoutString === 'checkout/v2/ticketdelivery') {
             addContent('.spx-legend-guide__checkout--ticket-delivery', 'Default messaging', 'uneditable')
@@ -105,7 +109,9 @@ function addContent(query, content, textType) {
             addContent('.spx-heading-sub-headline__checkout--donation', 'Pulls from Name of specific Fund', 'admin')
             addContent('.spx-text-copy__checkout--donation', 'Pulls from Description of specific Fund', 'editable')
             addContent('.spx-label-field__checkout--donation', 'Default messaging', 'uneditable')
-            addContent('.spx-field-container__checkout--donation', 'Pulls from Settings > System Setup > Donations', 'editable')
+            addContent('span.spx-text-copy spx-text-copy__checkout.spx-text-copy__checkout--donation + div.spx-field-container__checkout--donation', 'Pulls from Default Amount for specific Fund','admin')
+            addContent('span.spx-text-copy spx-text-copy__checkout.spx-text-copy__checkout--donation + div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation recognition on the website', 'conditional')
+            addContent('span.spx-text-copy spx-text-copy__checkout.spx-text-copy__checkout--donation + div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation recognition on the website', 'conditional')
 
         } else if (expressCheckoutString === 'checkout/v2/giftaid') {
             
@@ -114,7 +120,7 @@ function addContent(query, content, textType) {
             addContent('.spx-field-container__checkout--contact-preferences', 'Pulls from Text of specific Contact Preference, editable under Settings > Customers > Contact Preferences', 'editable')
             
         } else if (expressCheckoutString === 'checkout/v2/ordersummary') {
-            addContent('.spx-wikitext-container__checkout--order-summary', 'Editable under Settings > System Setup > Display Terms and Conditions AND Enter your Terms and Conditions below', 'editable')
+            addContent('TermsAndConditionsWikiText', 'Editable under Settings > System Setup > Display Terms and Conditions AND Enter your Terms and Conditions below', 'editable')
             addContent('.spx-heading-sub-headline__checkout', 'Default messaging', 'uneditable')
             addContent('.spx-field-container__checkout--credit', 'Default messaging', 'uneditable')
             addContent('.spx-subsection-container__checkout--final-summary', 'Default messaging', 'uneditable')
