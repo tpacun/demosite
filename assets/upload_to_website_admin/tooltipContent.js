@@ -215,6 +215,8 @@ function addContent(query, content, textType) {
         addContent('#ctl00_ContentPlaceHolder_HeaderWikiText', 'Optional message, edited in Settings > Configuration > System Setup > Memberships on Web > Custom message for memberships.aspx', 'editable')
         addContent('.LoginForRenewalMessage', 'Default messaging', 'uneditable')
         addContent('.Membership > .WikiText > div', 'Pulls from Website Content for specific membership', 'admin')
+        addContent('.Details > ul', 'Pulls from setup for specific Fund', 'admin')
+        addContent('.AutoRenew', 'Pulls from setup for specific Fund', 'admin')
         addContent('input[type="submit"]', 'Default buttons', 'uneditable')
     } else if (iframeString === 'merchandise') {
         // Merchandise
@@ -236,7 +238,7 @@ function addContent(query, content, textType) {
 
             // Page 1:  Choose Events, Pricing, Number of Packages
             addContent('.ChooseEvents', 'Default messaging', 'uneditable')
-            addContent('.FixedSeriesEventsList', 'Pulls  from selected Events for specific Fixed Series', 'admin')
+            addContent('.FixedSeriesEventsList', 'Pulls from selected Events for specific Fixed Series', 'admin')
             addContent('.Button', 'Default messaging', 'uneditable')
             addContent('.ChoosePricing', 'Default messaging', 'uneditable')
             addContent('.ChoosePricingButtons', 'Pulls from names of Subscription Pricing Sets for specific Fixed Series', 'admin')
@@ -244,7 +246,7 @@ function addContent(query, content, textType) {
             addContent('label[for="ctl00_ContentPlaceHolder_EventsAndPricingControl_PackageCountBox"]', 'Default messaging', 'uneditable')
 
             // Page 2: Choose Sub Group
-
+            addContent('.SeriesDetails', 'Pulls from Wikitext of specific Fixed Series', 'admin')
             addContent('.SubscriptionGroupName', 'Pulls from names of Subscription Groups for specific Fixed Series', 'admin')
             addContent('.EventInstanceDates', 'Pulls from name and time of Event Instances for specific Fixed Series Subscription Group', 'admin')
 
