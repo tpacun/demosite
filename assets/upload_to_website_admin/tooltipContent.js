@@ -223,7 +223,7 @@ function addContent(query, content, textType) {
         addContent('.WikiText', 'Pulls from Website Content for specific merchandise item', 'admin')
 
     } else if (iframeString === 'fixedseries'){
-        if (fixedSeriesString === 'ChooseSeries') {
+        if (fixedSeriesString === 'chooseseries') {
 
             // Choose FS
 
@@ -232,7 +232,7 @@ function addContent(query, content, textType) {
             addContent('.SeriesTime', 'Pulls from range of dates for Insances of specific Fixed Series', 'admin')
             addContent('.BookSeriesLink', 'Default messaging', 'uneditable')
 
-        } else if  (fixedSeriesString === 'EventsAndPricing') {
+        } else if  (fixedSeriesString === 'eventsandpricing') {
 
             // Page 1:  Choose Events, Pricing, Number of Packages
             addContent('.ChooseEvents', 'Default messaging', 'uneditable')
