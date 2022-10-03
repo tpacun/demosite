@@ -30,6 +30,7 @@
   position: absolute;
   padding: 5px 10px;
   margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-uneditable);
   color: white;
   border-radius: 3px;
@@ -44,6 +45,7 @@
   position: absolute;
   padding: 5px 10px;
   margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-argument);
   color: white;
   border-radius: 3px;
@@ -58,6 +60,7 @@
   position: absolute;
   padding: 5px 10px;
   margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-admin);
   color: white;
   border-radius: 3px;
@@ -72,6 +75,7 @@
   position: absolute;
   padding: 5px 10px;
   margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-editable);
   color: white;
   border-radius: 3px;
@@ -86,6 +90,7 @@
     position: absolute;
     padding: 5px 10px;
     margin: 0 0 0 0;
+right: 0px;
     background: var(--tooltip-color-conditional);
     color: white;
     border-radius: 3px;
