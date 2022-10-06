@@ -108,12 +108,12 @@ function addContent(query, content, textType) {
             
         } else if (expressCheckoutString === 'checkout/v2/donations') {
             addContent('.spx-wikitext-container__checkout--donations', 'Editable under Settings > System Setup > Custom body wikitext for the donations step in the new checkout flow', 'editable')
+            addContent('.spx-subsection-container__checkout--donation', 'Appears based upon Event Criteria set in specific Fund', 'admin')
             addContent('.spx-heading-sub-headline__checkout--donation', 'Pulls from Name of specific Fund', 'admin')
-            addContent('.spx-text-copy__checkout--donation', 'Pulls from Description of specific Fund', 'editable')
+            addContent('div.spx-subsection-container.spx-subsection-container__checkout.spx-subsection-container__checkout--donation > .spx-text-copy__checkout--donation', 'Pulls from Description of specific Fund', 'admin')
             addContent('.spx-label-field__checkout--donation', 'Default messaging', 'uneditable')
-            addContent('span.spx-text-copy spx-text-copy__checkout.spx-text-copy__checkout--donation + div.spx-field-container__checkout--donation', 'Pulls from Default Amount for specific Fund','admin')
-            addContent('span.spx-text-copy spx-text-copy__checkout.spx-text-copy__checkout--donation + div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation recognition on the website', 'conditional')
-            addContent('span.spx-text-copy spx-text-copy__checkout.spx-text-copy__checkout--donation + div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation recognition on the website', 'conditional')
+            addContent('input.spx-input-text.spx-input-text__checkout.spx-input-text__checkout--donation[data-role="Amount"]', 'Pulls from Default Amount for specific Fund','admin')
+            addContent('div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation recognition on the website', 'conditional')
 
         } else if (expressCheckoutString === 'checkout/v2/giftaid') {
             
