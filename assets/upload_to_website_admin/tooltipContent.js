@@ -82,7 +82,7 @@ function addContent(query, content, textType) {
 
         } else if (expressCheckoutString === 'checkout/v2/personaldetails') {
             
-            addContent('.spx-field-container__checkout--personal-details', 'Default messaging [[based upon what things are collected editable AT LOCATION]]', 'conditional')
+            addContent('.spx-field-container__checkout--personal-details', 'Default messaging; DOB and phone number as requirements for new account are switches in Settings > Configuration > System Setup > Website > Ensure customers...', 'conditional')
             
         } else if (expressCheckoutString === 'checkout/v2/ticketdelivery') {
             addContent('.spx-legend-guide__checkout--ticket-delivery', 'Default messaging', 'uneditable')
@@ -286,7 +286,6 @@ function addContent(query, content, textType) {
         addContent('#ctl00_ContentPlaceHolder_RedeemGiftLink', 'Default messaging', 'uneditable')
         addContent('.Container', 'Default messaging', 'uneditable')
         addContent('.Comment.AddAnotherVoucherText', 'Default messaging', 'uneditable')
-
 
     }
     }
