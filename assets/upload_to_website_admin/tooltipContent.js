@@ -98,9 +98,9 @@ function addContent(query, content, textType) {
             addContent('.spx-legend-guide__checkout--merchandise-delivery', 'Default messaging', 'uneditable')
             addContent('form[action="/iframedemo/website/secure/checkout/v2/merchandisedelivery"]', 'Will appear if Allow Postal Delivery is checked off on specific merchandise item', 'admin')
             addContent('.spx-field-container__checkout--merchandise-delivery', 'Default messaging', 'uneditable')
-            addContent('.spx-data-delivery-price', 'Pulls from commission delivery setup', 'admin')
+            addContent('.spx-data-delivery-price', 'Pulls from Commission for specific Delivery method', 'admin')
             addContent('.spx-heading-sub-headline__checkout--merchandise-delivery-address', 'Default messaging', 'uneditable')
-            addContent('.spx-data-delivery-type', 'Default messaging', 'conditional')
+            addContent('.spx-data-delivery-type', 'Default messaging', 'uneditable')
             
         } else if (expressCheckoutString === 'checkout/v2/additionaldetails') {
             addContent('.spx-wikitext-container__checkout--additional-details','Editable under Settings > System Setup > Custom message for the Additional Details tab on checkout.aspx (i.e. for Order Attribute by Event)', 'editable')
