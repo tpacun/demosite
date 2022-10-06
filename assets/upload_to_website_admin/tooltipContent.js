@@ -62,9 +62,10 @@ function addContent(query, content, textType) {
     // secure/checkout/v2/orderconfirmation
 
     if(expressCheckoutString) {
-        addContent('.spx-heading-title__checkout spx-heading-title__checkout--personal-details', 'Default messaging', 'uneditable')
+        addContent('.spx-heading-title__checkout.spx-heading-title__checkout--personal-details', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--personal-details', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--ticket-delivery', 'Default messaging', 'uneditable')
+        addContent('.spx-heading-headline__checkout--merchandise-delivery', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--additional-details', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--donations', 'Editable under Settings > System Setup > Donations on Web > Custom header for the donations step in the  new checkout flow. (Plain Text)', 'editable')
         addContent('.spx-heading-headline__checkout--contact-preferences', 'Default messaging', 'uneditable')
@@ -93,12 +94,13 @@ function addContent(query, content, textType) {
             addContent('.spx-button-primary__checkout--ticket-delivery', 'Default messaging', 'uneditable')
             
         } else if (expressCheckoutString === 'checkout/v2/merchandisedelivery') {
-            addContent('.spx-heading-headline__checkout--merchandise-delivery', 'Default messaging', 'uneditable')
+
             addContent('.spx-legend-guide__checkout--merchandise-delivery', 'Default messaging', 'uneditable')
-            addContent('.spx-fieldset-container__checkout--merchandise-delivery', 'Will appear if Allow Postal Delivery is checked off on specific merchandise item', 'admin')
+            addContent('form[action="/iframedemo/website/secure/checkout/v2/merchandisedelivery"]', 'Will appear if Allow Postal Delivery is checked off on specific merchandise item', 'admin')
             addContent('.spx-field-container__checkout--merchandise-delivery', 'Default messaging', 'uneditable')
-            addContent('.spx-data-delivery-type', 'Pulls from commission delivery setup', 'admin')
+            addContent('.spx-data-delivery-price', 'Pulls from commission delivery setup', 'admin')
             addContent('.spx-heading-sub-headline__checkout--merchandise-delivery-address', 'Default messaging', 'uneditable')
+            addContent('.spx-data-delivery-type', 'Default messaging', 'conditional')
             
         } else if (expressCheckoutString === 'checkout/v2/additionaldetails') {
             addContent('.spx-wikitext-container__checkout--additional-details','Editable under Settings > System Setup > Custom message for the Additional Details tab on checkout.aspx (i.e. for Order Attribute by Event)', 'editable')
@@ -143,7 +145,7 @@ function addContent(query, content, textType) {
         addContent('.SearchDescription', 'Dates automatically generated based upon the selected month of the page', 'argument')
         addContent('div.Events', 'Auto generated based upon the dates of Events in the Spektrix System and selected month of the page', 'argument')
         addContent('.Event_Name', 'Pulls from Title of specific Event', 'admin')
-        addContent('.Event_Image > img', 'Pulls from the Image of specific Event. Heavily compressed by our system - for best quality results, use of a CMS/external image source is best', 'admin')
+        addContent('.Event_Image', 'Pulls from the Image of specific Event. Heavily compressed by our system - for best quality results, use of a CMS/external image source is best', 'admin')
         addContent('span.Event_Description.Event_Detail', 'Pulls directly from the Description of specific Event.', 'admin')
         addContent('.Event_Dates', 'Pulls from Instance dates for specific Event within given date criteria', 'admin')
         addContent('.More_Info.Event_Detail', 'Default messaging', 'uneditable')
@@ -170,6 +172,9 @@ function addContent(query, content, textType) {
         addContent('div.PriorityBookingWikiText', 'Optional messaging which appears when Event is only bookable via Priority Booking. Editable under Settings > System Setup > Custom Website Messages > Custom message about priority booking. This appears on chooseseats.aspx when the Instance is only available via priority booking.', 'editable')
         addContent('p.SoldOutText', 'Optional messaging which displays regardless of sold out status. Editable in Website Admin > Domain Specific Config > Sold Out Message', 'editable')
         addContent('#ctl00_ContentPlaceHolder_PriorityBookingMessage', 'Default messaging, appears based upon Settings > Configuration > Queuing > Prompt customers to log in for priority booking', 'conditional')
+        addContent('#ctl00_ContentPlaceHolder_RelatedOffersControl1_Container', 'Default messaging, displays if an Offer has been marked as Active on Website and Events in Offer: All', 'conditional')
+
+
     } else if (iframeString === 'chooseseats') {
         // ChooseSeats.aspx
 
