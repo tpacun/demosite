@@ -62,7 +62,7 @@ function addContent(query, content, textType) {
     // secure/checkout/v2/orderconfirmation
 
     if(expressCheckoutString) {
-        addContent('.spx-heading-title__checkout.spx-heading-title__checkout--personal-details', 'Default messaging', 'uneditable')
+        addContent('header > h1.spx-heading-title__checkout', 'Default messaging', 'uneditable')
         addContent('.spx-heading-title__checkout--order-summary', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--personal-details', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--ticket-delivery', 'Default messaging', 'uneditable')
