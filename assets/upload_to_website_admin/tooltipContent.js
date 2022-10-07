@@ -75,6 +75,7 @@ function addContent(query, content, textType) {
         addContent('.spx-heading-headline__checkout--payment', 'Default messaging', 'uneditable')
         addContent('p > span.spx-validation-field-error', 'Appears if Express Checkout has not been turned on in Website Admin > Domain Specific Config > Enable Express Checkout', 'conditional')
         addContent('#privacy-policy-header, .spx-wikitext-container__checkout--contact-preferences', 'Optional messaging; editable under Settings > Customers > Privacy Policy', 'editable')
+        addContent('.spx-heading-sub-headline__checkout--contact-preferences', 'Pulls from name of Contact Preference Group, editable under Settings > Customers > Contact Preferences', 'editable')
 
         if (expressCheckoutString === 'checkout/v2') {
             addContent('.spx-text-copy', 'Default messaging', 'uneditable')
@@ -125,7 +126,6 @@ function addContent(query, content, textType) {
             
         } else if (expressCheckoutString === 'checkout/v2/ordersummary') {
             addContent('TermsAndConditionsWikiText', 'Editable under Settings > System Setup > Display Terms and Conditions AND Enter your Terms and Conditions below', 'editable')
-            addContent('.spx-heading-sub-headline__checkout--contact-preferences', 'Pulls from name of Contact Preference Group, editable under Settings > Customers > Contact Preferences', 'editable')
             addContent('.spx-heading-sub-headline__checkout--ticket-summary', 'Default messaging', 'uneditable')
             addContent('.spx-subsection-container__checkout--credit', 'Appears according to switch at Settings > Configuration > System Setup > Credits & Commissions > Allow customers to spend account credit via the website', 'conditional')
             addContent('div.spx-subsection-container.spx-subsection-container__checkout.spx-subsection-container__checkout--credit > spx-text-copy.spx-text-copy__checkout spx-text-copy__checkout--credit', 'Default messaging', 'uneditable')
@@ -136,7 +136,7 @@ function addContent(query, content, textType) {
 
         } else if (expressCheckoutString === 'checkout/v2/billingdetails') {
             addContent('.spx-heading-sub-headline__checkout', 'Default messaging', 'uneditable')
-            addContent('#StoreNewCardCheckBoxFieldContainer', 'Appears if card holder wallets have been turned on, default messaging', 'uneditable')
+            addContent('#StoreNewCardCheckBoxFieldContainer', 'Appears if card holder wallets have been turned on, default messaging', 'conditional')
             
         } else if (expressCheckoutString === 'checkout/v2/payment') {
             addContent('.spx-iframe__checkout', 'Default messaging', 'uneditable')
