@@ -144,7 +144,6 @@ function addContent(query, content, textType) {
 
             addContent('#StoreNewCardCheckBoxFieldContainer', 'Appears if card holder wallets have been turned on, default messaging', 'conditional')
 
-            
         } else if (expressCheckoutString === 'checkout/v2/payment') {
             addContent('.spx-iframe__checkout', 'Default messaging', 'uneditable')
             

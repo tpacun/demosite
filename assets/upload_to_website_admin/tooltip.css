@@ -21,6 +21,14 @@
   border-width: 5px;
 }
 
+*[data-tooltip-uneditable]:hover:before,
+*[data-tooltip-argument]:hover:before,
+*[data-tooltip-admin]:hover:before,
+*[data-tooltip-editable]:hover:before,
+*[data-tooltip-conditional]:hover:before {
+  max-width: 33%;
+}
+
 *[data-tooltip-uneditable] {
   border: 2px solid var(--tooltip-color-uneditable);
 }
