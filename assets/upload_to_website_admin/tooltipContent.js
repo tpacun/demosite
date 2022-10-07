@@ -77,6 +77,12 @@ function addContent(query, content, textType) {
         addContent('#privacy-policy-header, .spx-wikitext-container__checkout--contact-preferences', 'Optional messaging; editable under Settings > Customers > Privacy Policy', 'editable')
         addContent('.spx-heading-sub-headline__checkout--contact-preferences', 'Pulls from name of Contact Preference Group, editable under Settings > Customers > Contact Preferences', 'editable')
 
+        // Appears in ordersummary and beyond
+        addContent('.spx-heading-sub-headline__checkout--ticket-summary', 'Default messaging', 'uneditable')
+        addContent('.spx-heading-sub-headline__checkout--final-summary', 'Default messaging', 'uneditable')
+        addContent('.spx-heading-sub-headline__checkout--payment-method', 'Default messaging', 'uneditable')
+        addContent('.spx-heading-sub-headline__checkout--billing-address', 'Default messaging', 'uneditable')
+
         if (expressCheckoutString === 'checkout/v2') {
             addContent('.spx-text-copy', 'Default messaging', 'uneditable')
             addContent('.spx-field-container', 'Default messaging', 'uneditable')
@@ -135,8 +141,9 @@ function addContent(query, content, textType) {
             addContent('input.ea-triggers-bound + div.spx-wikitext-container.spx-wikitext-container__checkout.spx-wikitext-container__checkout--order-summary', 'Optional messaging; editable under Settings > Customers > Privacy Policy', 'editable')
 
         } else if (expressCheckoutString === 'checkout/v2/billingdetails') {
-            addContent('.spx-heading-sub-headline__checkout', 'Default messaging', 'uneditable')
+
             addContent('#StoreNewCardCheckBoxFieldContainer', 'Appears if card holder wallets have been turned on, default messaging', 'conditional')
+
             
         } else if (expressCheckoutString === 'checkout/v2/payment') {
             addContent('.spx-iframe__checkout', 'Default messaging', 'uneditable')
