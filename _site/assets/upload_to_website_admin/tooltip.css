@@ -21,6 +21,14 @@
   border-width: 5px;
 }
 
+*[data-tooltip-uneditable]:hover:before,
+*[data-tooltip-argument]:hover:before,
+*[data-tooltip-admin]:hover:before,
+*[data-tooltip-editable]:hover:before,
+*[data-tooltip-conditional]:hover:before {
+  max-width: 33%;
+}
+
 *[data-tooltip-uneditable] {
   border: 2px solid var(--tooltip-color-uneditable);
 }
@@ -29,7 +37,8 @@
   content: attr(data-tooltip-uneditable);
   position: absolute;
   padding: 5px 10px;
-  margin: 0 0 0 350px;
+  margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-uneditable);
   color: white;
   border-radius: 3px;
@@ -43,7 +52,8 @@
   content: attr(data-tooltip-argument);
   position: absolute;
   padding: 5px 10px;
-  margin: 0 0 0 350px;
+  margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-argument);
   color: white;
   border-radius: 3px;
@@ -57,7 +67,8 @@
   content: attr(data-tooltip-admin);
   position: absolute;
   padding: 5px 10px;
-  margin: 0 0 0 350px;
+  margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-admin);
   color: white;
   border-radius: 3px;
@@ -71,7 +82,8 @@
   content: attr(data-tooltip-editable);
   position: absolute;
   padding: 5px 10px;
-  margin: 0 0 0 350px;
+  margin: 0 0 0 0;
+right: 0px;
   background: var(--tooltip-color-editable);
   color: white;
   border-radius: 3px;
@@ -85,7 +97,8 @@
     content: attr(data-tooltip-conditional);
     position: absolute;
     padding: 5px 10px;
-    margin: 0 0 0 350px;
+    margin: 0 0 0 0;
+right: 0px;
     background: var(--tooltip-color-conditional);
     color: white;
     border-radius: 3px;
@@ -115,4 +128,16 @@
 
 ul.MonthList.Options > li {
   display: inline;
+}
+
+/* EventCalendar */
+
+div.EventsCalendar.SpektrixPage > table td {
+  border: 1px solid black;
+  width: 14%;
+  vertical-align: top;
+}
+
+td.Date.Inactive {
+  background: lightgray;
 }
