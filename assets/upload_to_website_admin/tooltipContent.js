@@ -31,7 +31,7 @@ class SpxUrl extends URL {
         }
 
         // Check for Fixed Series and set WizardStep
-        this.fixedSeriesLoc = this.spxLoc == 'fixedseries' ?  this.searchParams.get('WizardStep').toLowerCase() : undefined
+        this.fixedSeriesLoc = this.spxLoc == 'fixedseries.aspx' ?  this.searchParams.get('WizardStep').toLowerCase() : undefined
 
     }
 }
@@ -42,7 +42,7 @@ window.onload = () => {
 
     // Add url title at top
     const body = document.querySelector('body')
-    body.insertAdjacentHTML('afterbegin', `<h1 class="urlTitle">You are are on the iframe ${windowUrl.displayLoc}</h1>`)
+    body.insertAdjacentHTML('afterbegin', `<h1 class="urlTitle">You are are on the iframe: ${windowUrl.displayLoc}</h1>`)
 
     if(windowUrl.expressCheckout) {
         addContent('header > h1.spx-heading-title__checkout', 'Default messaging', 'uneditable')
