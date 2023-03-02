@@ -14,4 +14,3 @@ if (iframeString === 'loginlogout' || iframeString === 'forgotpassword' || ifram
     // Use regular iframe url
     document.write(`<iframe src="${SYSTEM_URL}website/${iframeString}.aspx" frameborder="1"></iframe>`)
 }
-

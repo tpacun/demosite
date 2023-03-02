@@ -4,64 +4,47 @@ function addContent(query, content, textType) {
         document.querySelectorAll(query).forEach((c) => c.setAttribute(`data-tooltip-${textType}`, content))
     }
 
-    window.onload = () => {
+class SpxUrl extends URL {
+    constructor(newUrl) {
+        super(newUrl)
 
-    // Url string manipulation
-    const parentUrl =  window.document.URL
-    const parentQuery = parentUrl.toLowerCase().split('/')
-    let expressCheckoutString;
-    let iframeArgs;
-    let iframeString;
-    let fixedSeriesString;
-    
-    // Check for secure
+        // splitPath for display
+        this.splitPath = this.pathname.split('/')
+        this.lastPath = this.splitPath[this.splitPath.length - 1]
+        this.displayLoc = this.lastPath
 
-    if (parentQuery[5] === 'secure') {
-
+        // splitPathLower for case matching utility
+        this.splitPathLower = this.pathname.toLowerCase().split('/')
+        this.lastPathLower = this.splitPathLower[this.splitPathLower.length - 1]
+        
         // Check for express checkout
-        if (parentQuery[7] === 'v2') {
-            const expressCheck = parentQuery.findIndex((c) => c === 'checkout')
+        this.expressCheckout = this.splitPathLower.includes('v2')
 
-            if (expressCheck >= 0) {
-                const secureArray = parentQuery.slice(expressCheck)
-                expressCheckoutString = secureArray.join('/')
-            }
+        // Set Express Checkout loc or regular loc
+        if (this.expressCheckout) {
+            this.spxLoc = 'expresscheckout'
+            this.expressCheckoutLoc = this.lastPathLower
+            this.displayLoc = `Express Checkout: ${this.expressCheckoutLoc}`
+        } else {
+            this.spxLoc = this.lastPathLower
+            this.expressCheckoutLoc = undefined
         }
 
-    } else {
+        // Check for Fixed Series and set WizardStep
+        this.fixedSeriesLoc = this.spxLoc == 'fixedseries' ?  this.searchParams.get('WizardStep').toLowerCase() : undefined
 
-        // All other iframe strings
-        const iframeStringFull = parentQuery[parentQuery.length - 1]
-        iframeString = iframeStringFull.split('.')[0]
-        iframeArgs = iframeStringFull.split('?')[1]
     }
+}
 
-    // Check fixed series url arguments
+window.onload = () => {
 
-    if (iframeString === 'fixedseries') {
-        fixedSeriesString = iframeArgs.split('=')[1].split('&')[0]
-    }
-    
+    const windowUrl = new SpxUrl(window.document.URL)
+
     // Add url title at top
     const body = document.querySelector('body')
-    body.insertAdjacentHTML('afterbegin', `<h1 class="urlTitle">You are are on the iframe ${expressCheckoutString ? expressCheckoutString:iframeString}</h1>`)
+    body.insertAdjacentHTML('afterbegin', `<h1 class="urlTitle">You are are on the iframe ${windowUrl.displayLoc}</h1>`)
 
-    // Classic Checkout
-    // secure/checkout/v2
-    // secure/checkout/v2/startcheckoutlogin
-    // secure/checkout/v2/personaldetails
-    // secure/checkout/v2/ticketdelivery
-    // secure/checkout/v2/merchandisedelivery
-    // secure/checkout/v2/additionaldetails
-    // secure/checkout/v2/donations
-    // secure/checkout/v2/giftaid
-    // secure/checkout/v2/contactpreferences
-    // secure/checkout/v2/ordersummary
-    // secure/checkout/v2/billingdetails
-    // secure/checkout/v2/payment
-    // secure/checkout/v2/orderconfirmation
-
-    if(expressCheckoutString) {
+    if(windowUrl.expressCheckout) {
         addContent('header > h1.spx-heading-title__checkout', 'Default messaging', 'uneditable')
         addContent('.spx-heading-title__checkout--order-summary', 'Default messaging', 'uneditable')
         addContent('.spx-heading-headline__checkout--personal-details', 'Default messaging', 'uneditable')
@@ -83,17 +66,17 @@ function addContent(query, content, textType) {
         addContent('.spx-heading-sub-headline__checkout--payment-method', 'Default messaging', 'uneditable')
         addContent('.spx-heading-sub-headline__checkout--billing-address', 'Default messaging', 'uneditable')
 
-        if (expressCheckoutString === 'checkout/v2') {
+        if (windowUrl.expressCheckoutLoc === 'v2') {
             addContent('.spx-text-copy', 'Default messaging', 'uneditable')
             addContent('.spx-field-container', 'Default messaging', 'uneditable')
             addContent('.spx-wikitext-container__checkout--start-checkout', 'Optional messaging; editable under Settings > Customers > Privacy Policy', 'editable')
             addContent('button', 'Default messaging', 'uneditable')
 
-        } else if (expressCheckoutString === 'checkout/v2/personaldetails') {
+        } else if (windowUrl.expressCheckoutLoc === 'personaldetails') {
             
             addContent('.spx-field-container__checkout--personal-details', 'Default messaging; DOB and phone number as requirements for new account are switches in Settings > Configuration > System Setup > Website > Ensure customers...', 'conditional')
             
-        } else if (expressCheckoutString === 'checkout/v2/ticketdelivery') {
+        } else if (windowUrl.expressCheckoutLoc === 'ticketdelivery') {
             addContent('.spx-legend-guide__checkout--ticket-delivery', 'Default messaging', 'uneditable')
             addContent('.spx-field-container__checkout--ticket-delivery', 'Pulls from delivery options setup per ticket type', 'admin')
             addContent('.spx-label-field__checkout--ticket-delivery', 'Default messaging', 'uneditable')
@@ -101,7 +84,7 @@ function addContent(query, content, textType) {
             addContent('.spx-data-group-address-select', 'Default messaging', 'uneditable')
             addContent('.spx-button-primary__checkout--ticket-delivery', 'Default messaging', 'uneditable')
             
-        } else if (expressCheckoutString === 'checkout/v2/merchandisedelivery') {
+        } else if (windowUrl.expressCheckoutLoc === 'merchandisedelivery') {
 
             addContent('.spx-legend-guide__checkout--merchandise-delivery', 'Default messaging', 'uneditable')
             addContent('form[action="/iframedemo/website/secure/checkout/v2/merchandisedelivery"]', 'Will appear if Allow Postal Delivery is checked off on specific merchandise item', 'admin')
@@ -110,11 +93,11 @@ function addContent(query, content, textType) {
             addContent('.spx-heading-sub-headline__checkout--merchandise-delivery-address', 'Default messaging', 'uneditable')
             addContent('.spx-data-delivery-type', 'Default messaging', 'uneditable')
             
-        } else if (expressCheckoutString === 'checkout/v2/additionaldetails') {
+        } else if (windowUrl.expressCheckoutLoc === 'additionaldetails') {
             addContent('.spx-wikitext-container__checkout--additional-details','Editable under Settings > System Setup > Custom message for the Additional Details tab on checkout.aspx (i.e. for Order Attribute by Event)', 'editable')
             addContent('.spx-label-field__checkout--additional-details', 'Pulls from name of specific Order Attribute, editable in Settings > Attribute Templates', 'editable')
             
-        } else if (expressCheckoutString === 'checkout/v2/donations') {
+        } else if (windowUrl.expressCheckoutLoc === 'donations') {
             addContent('.spx-wikitext-container__checkout--donations', 'Editable under Settings > System Setup > Custom body wikitext for the donations step in the new checkout flow', 'editable')
             addContent('.spx-subsection-container__checkout--donation', 'Appears based upon Event Criteria set in specific Fund', 'admin')
             addContent('.spx-heading-sub-headline__checkout--donation', 'Pulls from Name of specific Fund', 'admin')
@@ -124,13 +107,13 @@ function addContent(query, content, textType) {
             addContent('div.spx-field-container__checkout--donation + div.spx-field-container__checkout--donation', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation recognition on the website', 'conditional')
             addContent('button.spx-button-secondary__checkout--donations', 'Default messaging, displays if switch is turned on in Settings > Configuration > System Setup > Allow customers to continue with their transaction without donating', 'conditional')
 
-        } else if (expressCheckoutString === 'checkout/v2/giftaid') {
+        } else if (windowUrl.expressCheckoutLoc === 'giftaid') {
             
-        } else if (expressCheckoutString === 'checkout/v2/contactpreferences') {
+        } else if (windowUrl.expressCheckoutLoc === 'contactpreferences') {
             addContent('.spx-heading-sub-headline__checkout--contact-preferences', 'Pulls from name of Contact Preference Group, editable under Settings > Customers > Contact Preferences', 'editable')
             addContent('.spx-field-container__checkout--contact-preferences', 'Pulls from Text of specific Contact Preference, editable under Settings > Customers > Contact Preferences', 'editable')
             
-        } else if (expressCheckoutString === 'checkout/v2/ordersummary') {
+        } else if (windowUrl.expressCheckoutLoc === 'ordersummary') {
             addContent('TermsAndConditionsWikiText', 'Editable under Settings > System Setup > Display Terms and Conditions AND Enter your Terms and Conditions below', 'editable')
             addContent('.spx-heading-sub-headline__checkout--ticket-summary', 'Default messaging', 'uneditable')
             addContent('.spx-subsection-container__checkout--credit', 'Appears according to switch at Settings > Configuration > System Setup > Credits & Commissions > Allow customers to spend account credit via the website', 'conditional')
@@ -140,18 +123,18 @@ function addContent(query, content, textType) {
             addContent('div.spx-field-container.spx-field-container__checkout.spx-field-container__checkout--order-summary', 'Editable under Settings > System Setup > Display Terms and Conditions AND Enter your Terms and Conditions below', 'editable')
             addContent('input.ea-triggers-bound + div.spx-wikitext-container.spx-wikitext-container__checkout.spx-wikitext-container__checkout--order-summary', 'Optional messaging; editable under Settings > Customers > Privacy Policy', 'editable')
 
-        } else if (expressCheckoutString === 'checkout/v2/billingdetails') {
+        } else if (windowUrl.expressCheckoutLoc === 'billingdetails') {
 
             addContent('#StoreNewCardCheckBoxFieldContainer', 'Appears if card holder wallets have been turned on, default messaging', 'conditional')
 
-        } else if (expressCheckoutString === 'checkout/v2/payment') {
+        } else if (windowUrl.expressCheckoutLoc === 'payment') {
             addContent('.spx-iframe__checkout', 'Default messaging', 'uneditable')
             
-        } else if (expressCheckoutString === 'checkout/v2/orderconfirmation') {
+        } else if (windowUrl.expressCheckoutLoc === 'orderconfirmation') {
             
         }
 
-    } else if (iframeString === 'eventlist'){
+    } else if (windowUrl.spxLoc === 'eventlist.aspx'){
         // EventList.aspx
         addContent('.WhatsOnHeading', 'Default messaging', 'uneditable')
         addContent('.MonthList', 'List of months generated by the system automatically based off of current date and furthest Event Instance marked as visible in the future', 'admin')
@@ -163,7 +146,7 @@ function addContent(query, content, textType) {
         addContent('.Event_Dates', 'Pulls from Instance dates for specific Event within given date criteria', 'admin')
         addContent('.More_Info.Event_Detail', 'Default messaging', 'uneditable')
         addContent('p.NoEvents', 'Default messaging', 'uneditable')
-    } else if (iframeString === 'eventcalendar') {
+    } else if (windowUrl.spxLoc === 'eventcalendar.aspx') {
 
         addContent('.WhatsOnHeading', 'Default messaging', 'uneditable')
         addContent('.MonthList', 'List of months generated by the system automatically based off of current date and furthest Event Instance marked as visible in the future', 'admin')
@@ -174,7 +157,7 @@ function addContent(query, content, textType) {
         addContent('.MoreInfo', 'Default messaging', 'uneditable')
 
 
-    } else if (iframeString === 'eventdetails') {
+    } else if (windowUrl.spxLoc === 'eventdetails.aspx') {
 
         // EventDetails.aspx
         addContent('.DetailsContainer', 'Pulls from the Website Content of the specific event.', 'admin')
@@ -188,7 +171,7 @@ function addContent(query, content, textType) {
         addContent('#ctl00_ContentPlaceHolder_RelatedOffersControl1_Container', 'Default messaging, displays if an Offer has been marked as Active on Website and Events in Offer: All', 'conditional')
 
 
-    } else if (iframeString === 'chooseseats') {
+    } else if (windowUrl.spxLoc === 'chooseseats.aspx') {
         // ChooseSeats.aspx
 
         addContent('.ChooseSeatsHeading', 'Editable under Settings > System Setup > Custom Website Messages.', 'editable')
@@ -210,7 +193,7 @@ function addContent(query, content, textType) {
         addContent('td.PriceBand.Info', 'Price Band', 'admin')
         addContent('th.TicketType', 'Ticket Type', 'admin')
         addContent('td.TicketType', 'Ticket Price; service charge language hidable in Settings > System Setup > Price Lists > Do not itemize commission', 'conditional')
-    } else if (iframeString === 'edittickets') {
+    } else if (windowUrl.spxLoc === 'edittickets.aspx') {
             
         // EditTickets.aspx
         addContent('h1.EditTicketsHeading', 'Pulls from Name, Date, and Time of Instance', 'admin')
@@ -221,7 +204,7 @@ function addContent(query, content, textType) {
         addContent('.Area.Column', 'Area name of selected ticket. Editable in Admin > Seating Plan', 'admin')
         addContent('.SeatName.Column', 'Seat row and number', 'uneditable')
         addContent('.Type.Column', 'Ticket Types available, editable in Admin > Pricing > Ticket Types', 'admin')
-    } else if (iframeString === 'basket2') {
+    } else if (windowUrl.spxLoc === 'basket2.aspx') {
             
         // Basket2.aspx
         addContent('h1.BasketHeading', 'Default messaging, will change according to culture segment', 'argument')
@@ -233,7 +216,7 @@ function addContent(query, content, textType) {
         addContent('.Promo', 'Default messaging; appears only if Events or Merchandise have been selected as Recommended or Related', 'conditional')
         addContent('#ctl00_ContentPlaceHolder_OptionalMessagePanel', 'Optional message, edited in Settings > Configuration > System Setup > Custom Website Messages > Custom message for basket.aspx', 'editable')
         addContent('#ctl00_ContentPlaceHolder_WhatsOnLink', 'Only appears if a link has been added in Web Admin > Domain Specific Config > [select domain] > Basket "Book more tickets" Link', 'conditional')
-    } else if (iframeString === 'memberships') {
+    } else if (windowUrl.spxLoc === 'memberships.aspx') {
         //Memberships
 
         addContent('#ctl00_ContentPlaceHolder_HeaderWikiText', 'Optional message, edited in Settings > Configuration > System Setup > Memberships on Web > Custom message for memberships.aspx', 'editable')
@@ -242,15 +225,15 @@ function addContent(query, content, textType) {
         addContent('.Details > ul', 'Pulls from setup for specific Fund', 'admin')
         addContent('.AutoRenew', 'Pulls from setup for specific Fund', 'admin')
         addContent('input[type="submit"]', 'Default buttons', 'uneditable')
-    } else if (iframeString === 'merchandise') {
+    } else if (windowUrl.spxLoc === 'merchandise.aspx') {
         // Merchandise
 
         addContent('#ctl00_ContentPlaceHolder_HeaderWikiTextViewer', 'Optional message, edited in Settings > Configuration > System Setup > Custom message about merchandise', 'editable')
         addContent('.WikiText', 'Pulls from Website Content for specific Merchandise item', 'admin')
         addContent('p.Footer', 'Pulls from Price of specific Merchandise item', 'admin')
 
-    } else if (iframeString === 'fixedseries'){
-        if (fixedSeriesString === 'chooseseries') {
+    } else if (windowUrl.spxLoc === 'fixedseries.aspx'){
+        if (windowUrl.fixedSeriesLoc === 'chooseseries') {
 
             // Choose FS
 
@@ -259,7 +242,7 @@ function addContent(query, content, textType) {
             addContent('.SeriesTime', 'Pulls from range of dates for Insances of specific Fixed Series', 'admin')
             addContent('.BookSeriesLink', 'Default messaging', 'uneditable')
 
-        } else if  (fixedSeriesString === 'eventsandpricing') {
+        } else if  (windowUrl.fixedSeriesLoc === 'eventsandpricing') {
 
             // Page 1:  Choose Events, Pricing, Number of Packages
             addContent('.ChooseEvents', 'Default messaging', 'uneditable')
@@ -284,7 +267,7 @@ function addContent(query, content, textType) {
 
         }
 
-    } else if (iframeString === 'donations') {
+    } else if (windowUrl.spxLoc === 'donations.aspx') {
 
         addContent('#ctl00_ContentPlaceHolder_DonationsBlurb', 'Optional message, edited in Settings > Configuration > System Setup > Donations on Web > Custom message for donations.aspx. This appears for checkout donations too.', 'editable')
         addContent('.FundHeading', 'Pulls from Name of specific Fund', 'admin')
@@ -298,7 +281,7 @@ function addContent(query, content, textType) {
         addContent('[cssclass="TributeTypeAndNameContainer"]', 'Displays if turned on in Settings > Configuration > System Setup > Donations > Capture donation tribute on the website', 'conditional')
         addContent('#ctl00_ContentPlaceHolder_Funds_ctl00_TributeTypeDropDownList', 'Editable in Settings > Configuration > System Setup > Donations > Tribute Type', 'editable')
 
-    } else if (iframeString === 'giftvouchers') {
+    } else if (windowUrl.spxLoc === 'giftvouchers.aspx') {
         addContent('.AddGiftVoucherBlurb', 'Optional message, editable in Settings > Configuration > System Setup > Custom Website Messages > Custom message to display when a Gift Voucher is added to the basket', 'editable')
         addContent('.VoucherExpiryText', 'Displays according to Settings > Configuration > System Setup > Credits & Commissions > Default Gift Voucher Expiration', 'conditional')
         addContent('#ctl00_ContentPlaceHolder_RedeemGiftLink', 'Default messaging', 'uneditable')
@@ -306,4 +289,4 @@ function addContent(query, content, textType) {
         addContent('.Comment.AddAnotherVoucherText', 'Default messaging', 'uneditable')
 
     }
-    }
+}
