@@ -6,7 +6,7 @@
 :root {
   --tooltip-color-uneditable:#444B55;
   --tooltip-color-argument:#F18F01;
-  --tooltip-color-admin:#409BD6;
+  --tooltip-color-admin: #955EA6;
   --tooltip-color-editable:#72A23F;
   --tooltip-color-conditional:#208844;
 }
@@ -55,7 +55,7 @@ right: 0px;
   margin: 0 0 0 0;
 right: 0px;
   background: var(--tooltip-color-argument);
-  color: white;
+  color: black;
   border-radius: 3px;
 }
 
