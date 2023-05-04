@@ -163,7 +163,7 @@ window.onload = () => {
         addContent('.DetailsContainer', 'Can be edited in Admin > selected Event > Website > Website Content. Formattable with wikitext', 'admin')
         addContent('.DatesAndTimesHeading', 'Default messaging', 'uneditable')
         addContent('#ctl00_ContentPlaceHolder_DateInstructions', 'Default messaging', 'uneditable')
-        addContent('ul.MonthList.LinkList', 'Pulls from Instance dates for specific Event','admin')
+        addContent('ul.MonthList.LinkList', 'Pulls from Instance dates for specific Event','argument')
         addContent('div.EventDates', 'Pulls from Instance dates for specific Event', 'admin')
         addContent('div.PriorityBookingWikiText', 'Optional messaging which appears when Event is only bookable via Priority Booking. Editable under Settings > System Setup > Custom Website Messages > Custom message about priority booking. This appears on chooseseats.aspx when the Instance is only available via priority booking.', 'editable')
         addContent('p.SoldOutText', 'Optional messaging which displays regardless of sold out status. Editable in Website Admin > Domain Specific Config > Sold Out Message', 'editable')
