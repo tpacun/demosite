@@ -179,11 +179,11 @@ window.onload = () => {
         addContent('.AreaAndVenueDetails > span.AreaName', 'Pulls from associated Seating Plan. Editable in Admin > Seating > Seating Plan > Details > Name.', 'admin')
         addContent('.AreaAndVenueDetails > span.VenueName', 'Pulls from associated Venue in selected Seating Plan which is changeable in Admin > Seating > Seating Plans > selected Seating Plan > Details. Actual Venue Name is editable in Admin > Seating > Venues > selected Venue > Name.', 'admin')
         addContent('.AreaAndVenueDetails > span.VenueAddress', 'Pulls from associated Venue in selected Seating Plan which is changeable in Admin > Seating > Seating Plans > selected Seating Plan > Details. Actual Venue Address is editable in Admin > Seating > Venues > selected Venue > Address.', 'admin')
-        addContent('.InstanceCalendar', 'Default messaging', 'uneditable')
+        addContent('.InstanceCalendar', 'Default messaging - only displays if more than one live Instance', 'conditional')
         addContent('.SeatingAreaInstructions', 'Automatically from system - cannot edit text. "10" comes from maximum set for specific Event.', 'uneditable')
         addContent('.SeatingAreaOptionalInstructions', 'Optional message which appears universally across all instances; edited in Settings > Configuration > System Setup > Custom Website Messages > Custom message for seating plans. This appears on chooseseats.aspx', 'editable')
         addContent('.BestAvailableLink', 'Best available link - displays if best available is setup','conditional')
-        addContent('.Buttons', 'Default messaging - only displays if more than one live Instance', 'conditional')
+        addContent('.Buttons', 'Default messaging', 'uneditable')
         addContent('.Ticket_Types_Selection', 'Pulls from Price List of specific Instance', 'admin')
         addContent('label.left', 'Ticket Type Name', 'admin')
         addContent('span.Price', 'Price, service charge language hidable in Settings > System Setup > Price Lists > Do not itemize commission', 'conditional')
@@ -199,7 +199,7 @@ window.onload = () => {
             
         // EditTickets.aspx
         addContent('h1.EditTicketsHeading', 'Pulls from Name, Date, and Time of Instance', 'admin')
-        addContent('h2.EditTicketsHeading', 'Pulls from Venue Name and Address for specific Seating Plan', 'admin')
+        // addContent('h2.EditTicketsHeading', 'Pulls from Venue Name and Address for specific Seating Plan', 'admin')
         addContent('p.Message', 'Default messaging', 'uneditable')
         addContent('#ctl00_ContentPlaceHolder_EditTicketsWikiTextViewer', 'Optional message that will appear universally on all Events; edited in Settings > System Config > Custom Website Messages > Custom message for EventDetails.aspx', 'editable')
         addContent('#ctl00_ContentPlaceHolder_ChangeMySeatsLink', 'Default messaging - this is a link that takes you to chooseseats.aspx', 'uneditable')
